@@ -29,6 +29,9 @@ def main():
     for p in result["packed_parcels"]:
         print(f"    * {p.id}: {p.weight}kg, Value: {p.value}, Deadline: {p.deadline}m -> Deliver to {p.destination}")
 
+    print("\n[Phase 2 Evidence] Dynamic Programming (0/1 Knapsack) State Table:")
+    print_dp_table(result["dp_table"], result["sorted_parcels"], capacity)
+
     print("\n[Phase 3] Road Network Distance Matrix (Dijkstra):")
     targets = ["Depot"] + result["destinations"]
     header = f"  {'Node':<8}" + "".join(f"{t:>8}" for t in targets)
