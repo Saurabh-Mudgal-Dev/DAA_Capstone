@@ -42,3 +42,12 @@ def build_distance_matrix(graph: RoadGraph, targets: List[str]) -> Dict[str, Dic
         distances, _ = dijkstra_shortest_path(graph, node)
         matrix[node] = {target: distances.get(target, float('inf')) for target in targets}
     return matrix
+
+def build_path_matrix(graph: RoadGraph, targets: List[str]) -> Dict[str, Dict[str, List[str]]]:
+    paths = {}
+    for u in targets:
+        paths[u] = {}
+        _, predecessors = dijkstra_shortest_path(graph, u)
+        for v in targets:
+            paths[u][v] = reconstruct_path(predecessors, u, v)
+    return paths
